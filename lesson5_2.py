@@ -4,7 +4,7 @@ with open('file_2.txt', 'r', encoding='utf-8') as f:
     print(f"Количество строк: {len(content)}")
     i = 1
     for el in content:
-        print(f" Список {i} состоит из {len(el.split())} строк")
+        print(f" Строка {i} состоит из {len(el.split())} слов")
         i += 1
 
 
