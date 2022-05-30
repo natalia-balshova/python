@@ -30,7 +30,7 @@ class OfficeWarehouse:
                 self.printers['min prise'] = min(self.printer_prise_ls)
                 return self.printers
             else:
-                raise MyError(f'Error. This printer {office_equipment.__dict__.get("company")} cannot be added. '
+                raise MyError(f'Error. This printer {office_equipment} cannot be added. '
                               f'Check if number and price values are correct.')
         except MyError as err:
             print(err)
@@ -48,7 +48,7 @@ class OfficeWarehouse:
                 self.scanners['min prise'] = min(self.scanner_prise_ls)
                 return self.scanners
             else:
-                raise MyError(f'Error. This scanner {office_equipment.__dict__.get("company")} be added. '
+                raise MyError(f'Error. This scanner {office_equipment} be added. '
                               f'Check if number and price values are correct.')
         except MyError as err:
             print(err)
@@ -66,16 +66,27 @@ class OfficeWarehouse:
                 self.copiers['min prise'] = min(self.copier_prise_ls)
                 return self.copiers
             else:
-                raise MyError(f'Error. This copier {office_equipment.__dict__.get("company")} '
+                raise MyError(f'Error. This copier {office_equipment} '
                               f'cannot be added. Check if number and price values are correct.')
         except MyError as err:
             print(err)
 
     @property
     def get_info(self):
-        return f'Printers info:\n{self.printers}\n' \
+        self.info = f'Printers info:\n{self.printers}\n' \
                f'Scanners info:\n{self.scanners}\n' \
                f'Copiers info:\n{self.copiers}'
+        return self.info
+
+    @get_info.setter
+    def get_info(self, new_info):
+        print('Somebody changed info')
+        self.info = new_info
+
+    @get_info.deleter
+    def get_info(self):
+        print('Somebody deleted info')
+        del self.info
 
 
 class OfficeEquipment:
@@ -88,7 +99,7 @@ class OfficeEquipment:
         if isinstance(self.number, int) and isinstance(self.prise, (int, float)):
             print(f'This office equipment {self.company} can be added to the warehouse')
         else:
-            print('Confirm number and price values!')
+            print(f'Confirm number and price values of {self.company}!')
 
     def __str__(self):
         return self.company
@@ -115,7 +126,7 @@ class Copier(OfficeEquipment):
 
 my_warehouse = OfficeWarehouse()
 p1 = Printer('Samsumg', '44', 120)
-# p1.check()
+p1.check()
 p2 = Printer('Canon', 12, 159)
 p3 = Printer('hp', 25, 99.9)
 s1 = Scanner('Canon', 88, 1445)
